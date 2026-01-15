@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>BrightPath — Sign In</title>
+  <link rel="stylesheet" href="styles/signin.css">
+</head>
+<body>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="logo-area">
+      <img src="images/IMG-20251020-WA0029.jpg" alt="BrightPath Logo" class="auth-logo">
+      <h1>BrightPath</h1>
+      <p class="subtitle">Welcome back. Let’s get you signed in.</p>
+    </div>
+
+    <form class="auth-form">
+      <label>Email Address</label>
+      <input type="email" placeholder="Enter your email" required>
+      <label>Password</label>
+      <input type="password" placeholder="Enter your password" required>
+      <button class="btn-primary auth-btn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    signOut 
+  } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAy-WQUbH3WNPh_V9JI13p9gwIUQMGOgXw",
+    authDomain: "brightpath-d34ab.firebaseapp.com",
+    projectId: "brightpath-d34ab",
+    storageBucket: "brightpath-d34ab.firebasestorage.app",
+    messagingSenderId: "986348759672",
+    appId: "1:986348759672:web:aec8a20735e8aeb3969b8d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const allowedAdmins = [
+    "shaunmatsetela@gmail.com",
+    "brightpathaftercare@gmail.com"
+  ];
+
+  document.querySelector(".auth-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = e.target.querySelector('input[type="email"]').value.trim();
+    const password = e.target.querySelector('input[type="password"]').value;
+
+    try {
+      const userCred = await signInWithEmailAndPassword(auth, email, password);
+
+      if (!allowedAdmins.includes(userCred.user.email)) {
+        await signOut(auth);
+        alert("Access denied. Unauthorized account.");
+        return;
+      }
+
+      window.location.href = "index.html";
+
+    } catch (error) {
+      alert("Invalid email or password.");
+    }
+  });
+</script>
+
+</body>
+</html>    
