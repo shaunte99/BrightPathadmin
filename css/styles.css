@@ -1,0 +1,61 @@
+:root {
+  --blue: #2FA4D6;
+  --yellow: #F2B233;
+  --green: #3BB273;
+  --dark: #2E3A40;
+  --bg: #F9FAFB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+body {
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo { width: 120px; margin-bottom: 20px; }
+h2 { color: var(--dark); margin-bottom: 20px; }
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn-blue { background-color: var(--blue); }
+.btn-blue:hover { background-color: #2384b3; }
+
+.error-message { color: red; margin-top: 10px; font-size: 14px; }
