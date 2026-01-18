@@ -1,62 +1,96 @@
 :root {
   --blue: #2FA4D6;
   --yellow: #F2B233;
-  --green: #3BB273;
   --dark: #2E3A40;
   --bg: #F9FAFB;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
 
 body {
+  margin: 0;
   background: linear-gradient(135deg, var(--blue), var(--yellow));
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }
 
 .login-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .login-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 40px 30px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  background: white;
+  padding: 40px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 16px;
   text-align: center;
-  transition: transform 0.3s ease;
 }
-.login-card:hover { transform: translateY(-5px); }
 
-.logo { width: 100px; margin-bottom: 25px; border-radius: 50%; }
-
-h2 { color: var(--dark); margin-bottom: 20px; }
+.logo {
+  width: 90px;
+  margin-bottom: 20px;
+}
 
 input {
   width: 100%;
-  padding: 14px 12px;
-  margin-bottom: 15px;
+  padding: 14px;
+  margin-bottom: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 16px;
 }
-input:focus { border-color: var(--blue); outline: none; }
 
-button.btn-blue {
+.password-container {
+  position: relative;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--blue);
+}
+
+button {
   width: 100%;
   padding: 14px;
   background: var(--blue);
-  color: #fff;
-  font-size: 16px;
+  color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 16px;
 }
-button.btn-blue:hover { background: #2384b3; }
 
-.error-message { color: red; font-size: 14px; margin-top: 10px; }
+#error {
+  color: red;
+  margin-top: 10px;
+}
+
+.topbar {
+  background: var(--blue);
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+.dashboard {
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 600;
+}
