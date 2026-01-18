@@ -8,17 +8,22 @@ const loginError = document.getElementById('login-error');
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
 
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       const uid = userCredential.user.uid;
-
-      // Get user role from Realtime Database
       const dbRef = ref(db);
-      get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-        if (snapshot.exists()) {
+
+      // Check user role by UID in your database
+      get(child(dbRef, `users/${uid}`))
+        .then(snapshot => {
+          if (!snapshot.exists()) {
+            loginError.textContent = "User not found in database.";
+            return;
+          }
+
           const role = snapshot.val().role;
           if (role === 'admin') {
             window.location.href = 'admin.html';
@@ -27,13 +32,10 @@ loginForm.addEventListener('submit', (e) => {
           } else {
             loginError.textContent = "Role not recognized.";
           }
-        } else {
-          loginError.textContent = "User data not found in database.";
-        }
-      }).catch(err => {
-        loginError.textContent = "Database error: " + err.message;
-      });
-
+        })
+        .catch(err => {
+          loginError.textContent = "Database error: " + err.message;
+        });
     })
     .catch(error => {
       loginError.textContent = "Login failed: " + error.message;
