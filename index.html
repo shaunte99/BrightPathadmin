@@ -3,178 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BrightPath Admin System</title>
-  <link rel="stylesheet" href="styles/styles.css">
+  <title>BrightPath Login</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-<header>
-  <div class="header-container">
-    <div class="logo"><span class="bright">Bright</span><span class="path">Path</span></div>
-    <ul class="nav-links">
-      <li><a href="#" data-panel="dashboard">Dashboard</a></li>
-      <li><a href="#" data-panel="children">Children</a></li>
-      <li><a href="#" data-panel="tutors">Tutors</a></li>
-      <li><a href="#" data-panel="invoices">Invoices</a></li>
-      <li><a href="#" data-panel="attendance">Attendance</a></li>
-      <li><a href="#" data-panel="progress">Progress</a></li>
-      <li><a href="#" data-panel="calendar">Calendar</a></li>
-    </ul>
-  </div>
-</header>
-
-<div class="container">
-
-  <!-- Dashboard Panel -->
-  <div class="panel active" id="dashboard">
-    <h1>Dashboard</h1>
-    <div class="dashboard-grid">
-      <div class="card summary"><h3>Total Earned</h3><p id="totalEarned">R0</p></div>
-      <div class="card summary"><h3>Unpaid Invoices</h3><p id="unpaidCount">0</p></div>
+  <div class="login-container">
+    <div class="login-card">
+      <img src="images/IMG-20251020-WA0029.jpg" alt="BrightPath Logo" class="logo">
+      <h2>BrightPath Login</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit" class="btn btn-blue">Login</button>
+      </form>
+      <p id="login-error" class="error-message"></p>
     </div>
   </div>
 
-  <!-- Children Panel -->
-  <div class="panel" id="children">
-    <h1>Children</h1>
-    <div class="card">
-      <label>Name</label>
-      <input type="text" id="childName" placeholder="Child Name">
-      <label>Age</label>
-      <input type="number" id="childAge">
-      <label>Notes</label>
-      <input type="text" id="childNotes">
-      <button class="btn-primary" id="addChild">Add Child</button>
-    </div>
-    <div class="card">
-      <table class="table" id="childTable">
-        <thead><tr><th>Name</th><th>Age</th><th>Notes</th><th>Actions</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Tutors Panel -->
-  <div class="panel" id="tutors">
-    <h1>Tutors</h1>
-    <div class="card">
-      <label>Name</label><input type="text" id="tutorName">
-      <label>Subject</label><input type="text" id="tutorSubject">
-      <label>Contact</label><input type="text" id="tutorContact">
-      <button class="btn-primary" id="addTutor">Add Tutor</button>
-    </div>
-    <div class="card">
-      <table class="table" id="tutorTable">
-        <thead><tr><th>Name</th><th>Subject</th><th>Contact</th><th>Actions</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Invoices Panel -->
-  <div class="panel" id="invoices">
-    <h1>Invoices</h1>
-    <div class="card">
-      <label>Child</label>
-      <select id="invoiceChild"></select>
-      <label>Invoice Number</label><input type="text" id="invoiceNumber">
-      <label>Description</label><input type="text" id="invoiceDescription">
-      <label>Rate</label><input type="number" id="rate">
-      <label>Sessions</label><input type="number" id="sessions">
-      <label>Tax (%)</label><input type="number" id="tax">
-      <label>Discount</label><input type="number" id="discount">
-      <label>Paid? <input type="checkbox" id="markPaid"></label>
-      <button class="btn-primary" id="addInvoice">Add Invoice</button>
-      <button class="btn-secondary" id="exportInvoices">Export CSV</button>
-      <p>Subtotal: R<span id="subtotal">0</span>, Tax: R<span id="taxAmount">0</span>, Discount: R<span id="discountAmount">0</span>, Total: R<span id="totalAmount">0</span></p>
-    </div>
-    <div class="card">
-      <table class="table" id="invoicesTable">
-        <thead><tr><th>Number</th><th>Child</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <div class="card">
-      <h3>Recent Invoices</h3>
-      <table class="table" id="recentInvoices"><tbody></tbody></table>
-    </div>
-  </div>
-
-  <!-- Attendance Panel -->
-  <div class="panel" id="attendance">
-    <h1>Attendance</h1>
-    <div class="card">
-      <label>Child</label><select id="signinChild"></select>
-      <label>Sign-in Time</label><input type="time" id="signinTime">
-      <button class="btn-primary" id="signInChild">Sign In</button>
-      <button class="btn-secondary" id="signOutChild">Sign Out</button>
-    </div>
-    <div class="card">
-      <table class="table" id="signinTable">
-        <thead><tr><th>Child</th><th>Sign-in</th><th>Sign-out</th><th>Date</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <p>Today’s Sign-ins: <span id="todaySignins">0</span></p>
-    </div>
-  </div>
-
-  <!-- Progress Panel -->
-  <div class="panel" id="progress">
-    <h1>Progress</h1>
-    <div class="card">
-      <label>Child</label><select id="progressChild"></select>
-      <label>Week Start</label><input type="date" id="weekStart">
-      <label>Score</label><input type="number" id="progressScore">
-      <label>Summary</label><textarea id="progressSummary"></textarea>
-      <button class="btn-primary" id="addProgress">Add Progress</button>
-      <button class="btn-secondary" id="downloadProgress">Download All</button>
-    </div>
-    <div class="card">
-      <table class="table" id="progressTable">
-        <thead><tr><th>Child</th><th>Week Start</th><th>Score</th><th>Actions</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Calendar Panel -->
-  <div class="panel" id="calendar">
-    <h1>Calendar 2026</h1>
-    <div class="calendar-controls">
-      <button class="btn-secondary" id="prevMonth">&lt; Prev</button>
-      <h2 id="calendarMonth"></h2>
-      <button class="btn-secondary" id="nextMonth">Next &gt;</button>
-      <button class="btn-primary" id="newEventBtn">New Event</button>
-    </div>
-    <div class="calendar-grid" id="calendarGrid"></div>
-  </div>
-
-</div>
-
-<!-- Event Modal -->
-<div class="modal hidden" id="eventModal">
-  <div class="modal-inner">
-    <h2 id="eventModalTitle"></h2>
-    <label>Title</label><input type="text" id="eventTitle">
-    <label>Date</label><input type="date" id="eventDate">
-    <label>Time</label><input type="time" id="eventTime">
-    <label>Notes</label><textarea id="eventNotes"></textarea>
-    <label>Child</label><select id="eventChild"></select>
-    <div style="margin-top:12px;text-align:right">
-      <button class="btn-secondary" id="cancelEvent">Cancel</button>
-      <button class="btn-primary" id="saveEvent">Save Event</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="scripts/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>
-
